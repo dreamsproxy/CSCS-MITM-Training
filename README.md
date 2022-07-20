@@ -37,7 +37,7 @@ Wait until the virtual machine has fully booted.
 *You will see a login screen*
 Login into the virtual machine
 
-### Step 5
+#### Step 5
 Once you have logged on, connect the WLAN driver to the virtual machine
 Wait 5 seconds
 
