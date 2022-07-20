@@ -42,7 +42,7 @@ Once you have logged on, connect the WLAN driver to the virtual machine
 Wait 5 seconds
 
 #### Step 6
-There will be 1 application on the desktop named `Auto-Wireshark`
+There will be 1 application on the desktop named `Auto-Wireshark.sh`.
 Double click it
 
 The system should automatically start wireshark on the interface you switched to.
