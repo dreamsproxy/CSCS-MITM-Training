@@ -1,0 +1,4 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "gusztavvargadr/ubuntu-desktop"
+  config.vm.box_download_location_trusted = true
+end

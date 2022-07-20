@@ -1,0 +1,6 @@
+check for usbcore: registered new interface driver
+
+test_driver = r8188eu
+
+config docs
+https://gist.github.com/renaudcerrato/db053d96991aba152cc17d71e7e0f63c
