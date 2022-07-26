@@ -1,11 +1,7 @@
-cd machine/
-
-FILE=./Vagrantfile
-if [ -f "$FILE" ]; then
-    echo "$FILE exists"
-    echo "Attempting to initialize vagrant env"
-    vagrant up
-else
-    echo " $FILE does not exist."
-    echo "Attempting to run 'vagrant init ubuntu/focal64'"
-    vagrant init ubuntu/focal64
+#!/bin/bash
+sudo apt install hostapd iproute2 iwconfig util-linux procps
+git clone https://github.com/oblique/create_ap
+cd create_ap
+make install
+cd ..
+sudo rm -rf create_ap

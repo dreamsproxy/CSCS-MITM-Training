@@ -1,1 +1,0 @@
-python3 ../home/Auto-Wireshark/main.py
