@@ -27,7 +27,7 @@ def wlan_interfaces(DEBUG):
         print("Could not find wireless inpsterface.")
         print("Please enter your wireless interface, please")
         target_interface = input(" >>> ")
-        return tagret_interface
+        return target_interface
     else:
         print(wireless_interfaces)
         if DEBUG:
@@ -39,9 +39,12 @@ def wlan_interfaces(DEBUG):
 def start_rogueAP(wlan_id, ethernet_id):
     ap_command = str(f"x-terminal-emulator -e 'sudo create_ap {wlan_id} {ethernet_id} TPE-Free'")
     ws_command = str("x-terminal-emulator -e 'sudo wireshark -k -i ap0'")
-    subprocess.Popen(shlex.split(ap_command))
-    time.sleep(10)
-    subprocess.Popen(shlex.split(ws_command))
+
+    wap_process = subprocess.Popen(shlex.split(ap_command), stdout=subprocess.PIPE)
+    print(wap_process.stdout)
+    time.sleep(15)
+    wireshark_process = subprocess.Popen(shlex.split(ws_command), stdout=subprocess.PIPE)
+
 
 def main():
     wlan = wlan_interfaces(False)
