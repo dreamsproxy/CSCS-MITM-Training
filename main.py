@@ -1,40 +1,12 @@
-#from asyncio.windows_utils import Popen
-from subprocess import Popen, PIPE, CalledProcessError, check_output
+import subprocess
 import sys
 import shlex
 import time
 
-def nat_interfaces(DEBUG):
-    nat_interfaces = []
-
-    interfaces = check_output("ip a", shell=True)
-    interfaces = interfaces.decode().split("\n")
-    if DEBUG:
-        print(interfaces[3])
-    for i in interfaces:
-        if "eth" in i.lower():
-            nat_interfaces.append(i.split(": "))
-        if "enp" in i.lower():
-            nat_interfaces.append(i.split(": "))
-        if "nat" in i.lower():
-            nat_interfaces.append(i.split(": "))
-    if len(nat_interfaces) < 1:
-        print("Could not find wireless inpsterface.")
-        print("Please enter your wireless interface, please")
-        target_interface = input(" >>> ")
-        return target_interface
-    else:
-        print(nat_interfaces)
-        if DEBUG:
-            for i in nat_interfaces:
-                print(i[0][1])
-        #print(nat_interfaces)
-        return nat_interfaces[0][1]
-
 def wlan_interfaces(DEBUG):
     wireless_interfaces = []
 
-    interfaces = check_output("ip a", shell=True)
+    interfaces = subprocess.check_output("ip a", shell=True)
     interfaces = interfaces.decode().split("\n")
     if DEBUG:
         print(interfaces[3])
@@ -61,22 +33,15 @@ def wlan_interfaces(DEBUG):
         if DEBUG:
             for i in wireless_interfaces:
                 print(i[0][1])
-        #print(wireless_interfaces)
+        print(wireless_interfaces)
         return wireless_interfaces[0][1]
 
 def start_rogueAP(wlan_id, ethernet_id):
     ap_command = str(f"x-terminal-emulator -e 'sudo create_ap {wlan_id} {ethernet_id} TPE-Free'")
-    ws_command = str("x-terminal-emulator -e 'sudo tshark -k -i ap0'")
-
-    Popen(shlex.split(ap_command))
-    time.sleep(15)
-
-    #wireshark_process = Popen(shlex.split(ws_command), stdout=PIPE)
-    #print(wap_process.stdout)
-
-    with Popen(shlex.split(ws_command), stdout=PIPE) as ws_p:
-        for b in ws_p.stdout:
-            print(b, end="")
+    ws_command = str("x-terminal-emulator -e 'sudo wireshark -k -i ap0'")
+    subprocess.Popen(shlex.split(ap_command))
+    time.sleep(10)
+    subprocess.Popen(shlex.split(ws_command))
 
 def main():
     wlan = wlan_interfaces(False)
