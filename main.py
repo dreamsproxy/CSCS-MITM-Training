@@ -47,7 +47,7 @@ def start_rogueAP(wlan_id, ethernet_id):
     #wireshark_process = Popen(shlex.split(ws_command), stdout=PIPE)
     #print(wap_process.stdout)
 
-    with Popen(shlex.split(ws_command), stdout=PIPE, universal_newlines=True, shell=True) as ws_p:
+    with Popen(shlex.split(ws_command), stdout=PIPE, universal_newlines=True) as ws_p:
         for b in ws_p.stdout:
             print(b, end="")
         if ws_p.returncode != 0:
