@@ -39,15 +39,16 @@ def wlan_interfaces(DEBUG):
 
 def start_rogueAP(wlan_id, ethernet_id):
     ap_command = str(f"x-terminal-emulator -e 'sudo create_ap {wlan_id} {ethernet_id} TPE-Free'")
-    wap_process = Popen(shlex.split(ap_command), stdout=PIPE)
+    ws_command = str("x-terminal-emulator -e 'sudo tshark -k -i ap0'")
+
+    Popen(shlex.split(ap_command))
     time.sleep(15)
 
-    ws_command = str("x-terminal-emulator -e 'sudo tshark -k -i ap0'")
     #wireshark_process = Popen(shlex.split(ws_command), stdout=PIPE)
     #print(wap_process.stdout)
 
-    with Popen(cmd=shlex.split(ws_command), stdout=PIPE, universal_newlines=True, shell=True) as ws_p:
-        for b in wap_process.stdout:
+    with Popen(shlex.split(ws_command), stdout=PIPE, universal_newlines=True, shell=True) as ws_p:
+        for b in ws_p.stdout:
             print(b, end="")
         if ws_p.returncode != 0:
             raise CalledProcessError
