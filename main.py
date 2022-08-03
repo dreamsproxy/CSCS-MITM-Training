@@ -1,4 +1,5 @@
-import subprocess
+#from asyncio.windows_utils import Popen
+from subprocess import Popen, PIPE, CalledProcessError, check_output
 import sys
 import shlex
 import time
@@ -6,7 +7,7 @@ import time
 def wlan_interfaces(DEBUG):
     wireless_interfaces = []
 
-    interfaces = subprocess.check_output("ip a", shell=True)
+    interfaces = check_output("ip a", shell=True)
     interfaces = interfaces.decode().split("\n")
     if DEBUG:
         print(interfaces[3])
@@ -38,14 +39,17 @@ def wlan_interfaces(DEBUG):
 
 def start_rogueAP(wlan_id, ethernet_id):
     ap_command = str(f"x-terminal-emulator -e 'sudo create_ap {wlan_id} {ethernet_id} TPE-Free'")
-    ws_command = str("x-terminal-emulator -e 'sudo wireshark -k -i ap0'")
-
-    wap_process = subprocess.Popen(shlex.split(ap_command), stdout=subprocess.PIPE)
-    print(wap_process.stdout)
+    wap_process = Popen(shlex.split(ap_command), stdout=PIPE)
     time.sleep(15)
-    wireshark_process = subprocess.Popen(shlex.split(ws_command), stdout=subprocess.PIPE)
 
-
+    ws_command = str("x-terminal-emulator -e 'sudo wireshark -k -i ap0'")
+    wireshark_process = Popen(shlex.split(ws_command), stdout=PIPE)
+    print(wap_process.stdout)
+    """
+    with Popen(ap_command, stdout=PIPE, universal_newlines=True, shell=True) as wap_p:
+        for b in wap_process.stdout:
+            print(b, end="")
+    """
 def main():
     wlan = wlan_interfaces(False)
     ethernet = "enp0s3"
