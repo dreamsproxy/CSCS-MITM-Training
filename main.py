@@ -4,6 +4,33 @@ import sys
 import shlex
 import time
 
+def nat_interfaces(DEBUG):
+    nat_interfaces = []
+
+    interfaces = check_output("ip a", shell=True)
+    interfaces = interfaces.decode().split("\n")
+    if DEBUG:
+        print(interfaces[3])
+    for i in interfaces:
+        if "eth" in i.lower():
+            nat_interfaces.append(i.split(": "))
+        if "enp" in i.lower():
+            nat_interfaces.append(i.split(": "))
+        if "nat" in i.lower():
+            nat_interfaces.append(i.split(": "))
+    if len(nat_interfaces) < 1:
+        print("Could not find wireless inpsterface.")
+        print("Please enter your wireless interface, please")
+        target_interface = input(" >>> ")
+        return target_interface
+    else:
+        print(nat_interfaces)
+        if DEBUG:
+            for i in nat_interfaces:
+                print(i[0][1])
+        #print(nat_interfaces)
+        return nat_interfaces[0][1]
+
 def wlan_interfaces(DEBUG):
     wireless_interfaces = []
 
@@ -47,11 +74,10 @@ def start_rogueAP(wlan_id, ethernet_id):
     #wireshark_process = Popen(shlex.split(ws_command), stdout=PIPE)
     #print(wap_process.stdout)
 
-    with Popen(shlex.split(ws_command), stdout=PIPE, universal_newlines=True) as ws_p:
+    with Popen(shlex.split(ws_command), stdout=PIPE) as ws_p:
         for b in ws_p.stdout:
             print(b, end="")
-        if ws_p.returncode != 0:
-            raise CalledProcessError
+
 def main():
     wlan = wlan_interfaces(False)
     ethernet = "enp0s3"
