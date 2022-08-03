@@ -34,7 +34,7 @@ def wlan_interfaces(DEBUG):
         if DEBUG:
             for i in wireless_interfaces:
                 print(i[0][1])
-        print(wireless_interfaces)
+        #print(wireless_interfaces)
         return wireless_interfaces[0][1]
 
 def start_rogueAP(wlan_id, ethernet_id):
@@ -44,12 +44,12 @@ def start_rogueAP(wlan_id, ethernet_id):
 
     ws_command = str("x-terminal-emulator -e 'sudo tshark -k -i ap0'")
     #wireshark_process = Popen(shlex.split(ws_command), stdout=PIPE)
-    print(wap_process.stdout)
+    #print(wap_process.stdout)
 
-    with Popen(cmd=shlex.split(ws_command), stdout=PIPE, universal_newlines=True, shell=True) as wap_p:
+    with Popen(cmd=shlex.split(ws_command), stdout=PIPE, universal_newlines=True, shell=True) as ws_p:
         for b in wap_process.stdout:
             print(b, end="")
-        if wap_p.returncode != 0:
+        if ws_p.returncode != 0:
             raise CalledProcessError
 def main():
     wlan = wlan_interfaces(False)
