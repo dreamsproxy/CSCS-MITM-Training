@@ -34,11 +34,13 @@ def wlan_interfaces(DEBUG):
             for i in wireless_interfaces:
                 print(i[0][1])
         print(wireless_interfaces)
+        
         return wireless_interfaces[0][1]
 
 def start_rogueAP(wlan_id, ethernet_id):
-    ap_command = str(f"x-terminal-emulator -e 'sudo create_ap {wlan_id} {ethernet_id} TPE-Free'")
-    ws_command = str("x-terminal-emulator -e 'sudo wireshark -k -i ap0'")
+    ap_command = str(f"x-terminal-emulator -e 'sudo create_ap --no-virt -m nat {wlan_id} {ethernet_id} TPE-Free'")
+    http_filter '"http"'
+    ws_command = str(f"x-terminal-emulator -e 'sudo wireshark -k -i ap0 -Y {http_filter} '")
     subprocess.Popen(shlex.split(ap_command))
     time.sleep(10)
     subprocess.Popen(shlex.split(ws_command))
