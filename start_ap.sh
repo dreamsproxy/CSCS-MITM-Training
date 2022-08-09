@@ -1,1 +1,0 @@
-sudo create_ap
