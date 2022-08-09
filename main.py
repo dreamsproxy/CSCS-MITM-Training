@@ -39,7 +39,7 @@ def wlan_interfaces(DEBUG):
 
 def start_rogueAP(wlan_id, ethernet_id):
     ap_command = str(f"x-terminal-emulator -e 'sudo create_ap --no-virt -m nat {wlan_id} {ethernet_id} TPE-Free'")
-    http_filter '"http"'
+    http_filter str('"http"')
     ws_command = str(f"x-terminal-emulator -e 'sudo wireshark -k -i ap0 -Y {http_filter} '")
     subprocess.Popen(shlex.split(ap_command))
     time.sleep(10)
