@@ -14,10 +14,10 @@ Start Wireshark on selected W-LAN Adapater</br>
 
 ***
 ## Possible Future Works
-DNS Spoofing (IP Redirect)
-ARP Poisoning and Redirect (Data Redirection)
-SSL Cert Spoofing
-Proxy Interception
-MAC Spoofing
-IP Spoofing
-MITM Routing (Ettercap?)
+DNS Spoofing (IP Redirect)</br>
+ARP Poisoning and Redirect (Data Redirection)</br>
+SSL Cert Spoofing</br>
+Proxy Interception</br>
+MAC Spoofing</br>
+IP Spoofing</br>
+MITM Routing (Ettercap?)</br>
