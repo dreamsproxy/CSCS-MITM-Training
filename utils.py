@@ -23,15 +23,15 @@ def search_ifaces():
         #ping_return = subprocess.Popen(shlex.split(ping_command))
         try:
             ping_return = subprocess.check_output(shlex.split(ping_command), shell=True).decode().split("\n")
+            if "Reply from " in ping_return:
+                iface_dict["wireless"] = item
+            else:
+                print("\nSomething went wrong!")
+                print("DEBUG:\n")
+                raise "item does not exist"
+
         except:
             pass
-        if "Reply from " in ping_return:
-            iface_dict["wireless"] = item
-        else:
-            print("\nSomething went wrong!")
-            print("DEBUG:\n")
-            raise "item does not exist"
-
     print(iface_dict)
     #print(iface_list)
 
