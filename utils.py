@@ -20,7 +20,7 @@ def search_ifaces():
         raise "No interfaces found!"
     for item in iface_list:
         ping_command = f"ping -I {item} -c 5 google.com"
-        ping_return = subprocess.check_output(shlex.split(ping_command)).decode().split("\n")
+        ping_return = subprocess.check_output(shlex.split(ping_command), shell = True).decode().split("\n")
         print(ping_return)
         if "Reply from " in ping_return:
             iface_dict["ethernet"] = item
