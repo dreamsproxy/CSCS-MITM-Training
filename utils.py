@@ -22,7 +22,7 @@ def search_ifaces():
         ping_command = str(f"ping -I {item} -c 5 google.com")
         #ping_return = subprocess.Popen(shlex.split(ping_command))
         try:
-            ping_return = subprocess.check_output(shlex.split(ping_command), shell=True).decode().split("\n")
+            ping_return = subprocess.check_output(shlex.split(ping_command)).decode().split("\n")
             if "Reply from " in ping_return:
                 iface_dict["wireless"] = item
             else:
