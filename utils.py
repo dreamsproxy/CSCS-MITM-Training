@@ -18,21 +18,24 @@ def search_ifaces():
     if len(iface_list) < 1:
         raise "No interfaces found!"
     for item in iface_list:
-        if "w" in item:
-            iface_dict["wireless"] = item
-        elif "enp" in item:
-            iface_dict["ethernet"] = item
-        elif "eth" in item:
-            iface_dict["ethernet"] = item
-        else:
-           print("\nSomething went wrong!")
-           print("DEBUG:\n")
-           raise "item does not exist"
-    
+        ping_command = f"ping -I {item} -c 5 google.com"
+        ping_return = subprocess.check_output(ping_command).decode().split("\n")
+        if "Reply from " in ping_return:
+            if "w" in item:
+                iface_dict["wireless"] = item
+            elif "enp" in item:
+                iface_dict["ethernet"] = item
+            elif "eth" in item:
+                iface_dict["ethernet"] = item
+            else:
+                print("\nSomething went wrong!")
+                print("DEBUG:\n")
+                raise "item does not exist"
+
     print(iface_dict)
     #print(iface_list)
-    
+
     #with open("interfaces.dat", "w") as outfile:
     #    outfile.writelines(iface_list)
-    
+
     return iface_dict
