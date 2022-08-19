@@ -1,4 +1,5 @@
 import subprocess
+import shlex
 
 def search_ifaces():
     iface_list = []
@@ -19,18 +20,13 @@ def search_ifaces():
         raise "No interfaces found!"
     for item in iface_list:
         ping_command = f"ping -I {item} -c 5 google.com"
-        ping_return = subprocess.check_output(ping_command, shell=True).decode().split("\n")
+        ping_return = subprocess.check_output(shlex.split(ping_command), shell=True).decode().split("\n")
         if "Reply from " in ping_return:
-            if "w" in item:
-                iface_dict["wireless"] = item
-            elif "enp" in item:
-                iface_dict["ethernet"] = item
-            elif "eth" in item:
-                iface_dict["ethernet"] = item
-            else:
-                print("\nSomething went wrong!")
-                print("DEBUG:\n")
-                raise "item does not exist"
+            iface_dict["wireless"] = item
+        else:
+            print("\nSomething went wrong!")
+            print("DEBUG:\n")
+            raise "item does not exist"
 
     print(iface_dict)
     #print(iface_list)
