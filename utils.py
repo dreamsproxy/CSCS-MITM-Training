@@ -19,7 +19,7 @@ def search_ifaces():
     if len(iface_list) < 1:
         raise "No interfaces found!"
     for item in iface_list:
-        ping_command = f"ping -I {item} -c 5 google.com"
+        ping_command = str(f"ping -I {item} -c 5 google.com")
         ping_return = subprocess.check_output(shlex.split(ping_command), shell=True).decode().split("\n")
         if "Reply from " in ping_return:
             iface_dict["wireless"] = item
