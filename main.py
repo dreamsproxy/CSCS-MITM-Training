@@ -20,6 +20,7 @@ def main():
     wireless_ifaces, iface_list = search_ifaces()
     #ethernet = interfaces["ethernet"]
     gateway_list = gateway_detect(iface_list)
+    print(len(gateway_list))
     #for i in gateway_list:
     #    if ethernet in i:
     #        try:
