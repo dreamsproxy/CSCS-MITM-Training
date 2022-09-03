@@ -20,6 +20,7 @@ def gateway_detect(interface_list):
         except Exception as e:
             print("PING MODULE ERROR!\nCHECK EXCEPTION BELOW")
             print(e)
+            continue
 
         return gateway_interfaces
 
