@@ -53,8 +53,8 @@ def search_ifaces():
             raise "item does not exist"
         """
         if "w" in item:
-            if item not in iface_dict["ethernet"]:
-                iface_dict["wireless"] = item
+        #    if item not in iface_dict["ethernet"]:
+            iface_dict["wireless"] = item
     print(iface_dict)
     #print(iface_list)
 
