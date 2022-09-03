@@ -18,16 +18,16 @@ def start_rogueAP(wlan_id, gateway_interface):
 
 def main():
     interfaces = search_ifaces()
-    ethernet = interfaces["ethernet"]
+    #ethernet = interfaces["ethernet"]
     gateway_list = gateway_detect(interfaces)
-    for i in gateway_list:
-        if ethernet in i:
-            try:
-                gateway = i
-            except Exception as e:
-                print(e)
-                print("LIST OR i VARIABLE IS POSSIBLY EMPTY")
-
+    #for i in gateway_list:
+    #    if ethernet in i:
+    #        try:
+    #            gateway = i
+    #        except Exception as e:
+    #            print(e)
+    #            print("LIST OR i VARIABLE IS POSSIBLY EMPTY")
+    gateway = gateway_list[-1]
     wlan = interfaces["wireless"]
     start_rogueAP(wlan, gateway)
 
