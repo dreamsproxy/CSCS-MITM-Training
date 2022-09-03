@@ -2,7 +2,7 @@ import subprocess
 import shlex
 from ping3 import ping, verbose_ping
 
-def gatewat_detect(interface_list):
+def gateway_detect(interface_list):
     gateway_interfaces = []
     for iface in interface_list:
         try:
