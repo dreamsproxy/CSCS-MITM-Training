@@ -5,6 +5,7 @@ from ping3 import ping, verbose_ping
 def gateway_detect(interface_list):
     gateway_interfaces = []
     for iface in interface_list:
+        print(iface)
         try:
             ping_return = ping("8.8.8.8", interface=iface)
             if isinstance(ping_return, float):
