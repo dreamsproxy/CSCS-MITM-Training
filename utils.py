@@ -26,6 +26,7 @@ def gateway_detect(interface_list):
 def search_ifaces():
     iface_list = []
     iface_dict = {}
+    wireless_ifaces = []
     interfaces = subprocess.check_output("ip a", shell=True)
     interfaces = interfaces.decode().split("\n")
     search_keys = ["wlan", "wlx", "wifi", "wi fi", "wi-fi", "enp", "eth0", "eth1"]
@@ -54,12 +55,13 @@ def search_ifaces():
             raise "item does not exist"
         """
         if "w" in item:
-        #    if item not in iface_dict["ethernet"]:
+            #    if item not in iface_dict["ethernet"]:
+            wireless_ifaces.append(item)
             iface_dict["wireless"] = item
-    print(iface_dict)
+    #print(iface_dict)
     #print(iface_list)
 
     #with open("interfaces.dat", "w") as outfile:
     #    outfile.writelines(iface_list)
 
-    return iface_dict, iface_list
+    return wireless_ifaces, iface_list
