@@ -12,10 +12,12 @@ def gateway_detect(interface_list):
                 print(ping_return)
                 print(f"{iface} is internet acessible.")
                 gateway_interfaces.append(iface)
+            """
             else:
                 print("No internet accesible interfaces found!")
                 print("EXITING, PLEASE CONTACT DEV  AT changfengjui@gmail.com")
                 exit(1)
+            """
 
         except Exception as e:
             print("PING MODULE ERROR!\nCHECK EXCEPTION BELOW")
