@@ -28,6 +28,7 @@ def main():
     #            print(e)
     #            print("LIST OR i VARIABLE IS POSSIBLY EMPTY")
     gateway = gateway_list[-1]
+
     wlan = interfaces["wireless"]
     start_rogueAP(wlan, gateway)
 

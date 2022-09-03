@@ -6,7 +6,7 @@ def gateway_detect(interface_list):
     gateway_interfaces = []
     for iface in interface_list:
         try:
-            ping_return = ping("8.8.8.8", count=5, interface=iface)
+            ping_return = ping("8.8.8.8", interface=iface)
             if isinstance(ping_return, float):
                 print(ping_return)
                 print(f"{iface} is internet acessible.")
