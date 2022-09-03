@@ -17,9 +17,9 @@ def start_rogueAP(wlan_id, gateway_interface):
     subprocess.Popen(shlex.split(ws_command))
 
 def main():
-    interfaces = search_ifaces()
+    iface_dict, iface_list = search_ifaces()
     #ethernet = interfaces["ethernet"]
-    gateway_list = gateway_detect(interfaces)
+    gateway_list = gateway_detect(iface_list)
     #for i in gateway_list:
     #    if ethernet in i:
     #        try:
@@ -29,7 +29,7 @@ def main():
     #            print("LIST OR i VARIABLE IS POSSIBLY EMPTY")
     gateway = gateway_list[-1]
 
-    wlan = interfaces["wireless"]
+    wlan = iface_dict["wireless"]
     start_rogueAP(wlan, gateway)
 
 if __name__ == "__main__":

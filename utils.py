@@ -62,4 +62,4 @@ def search_ifaces():
     #with open("interfaces.dat", "w") as outfile:
     #    outfile.writelines(iface_list)
 
-    return iface_dict
+    return iface_dict, iface_list
