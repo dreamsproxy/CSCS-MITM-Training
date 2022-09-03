@@ -40,6 +40,7 @@ def search_ifaces():
     if len(iface_list) < 1:
         raise "No interfaces found!"
     for item in iface_list:
+        """
         ping_command = f"ping -I {item} -c 5 google.com"
         ping_return = subprocess.check_output(shlex.split(ping_command), shell = True).decode()
         print(ping_return)
@@ -50,7 +51,7 @@ def search_ifaces():
             print("\nSomething went wrong!")
             print("DEBUG:\n")
             raise "item does not exist"
-
+        """
         if "w" in item:
             if item not in iface_dict["ethernet"]:
                 iface_dict["wireless"] = item
